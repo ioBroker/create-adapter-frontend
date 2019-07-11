@@ -1,0 +1,12 @@
+{
+	"name": "@iobroker/create-adapter-frontend",
+	"version": "1.0.0",
+	"dependencies": {
+		"archiver": "^3.0.0",
+		"del": "^5.0.0",
+		"gulp": "^4.0.2"
+	},
+	"script": {
+		"test": "node test.js"
+	}
+}
