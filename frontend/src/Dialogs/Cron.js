@@ -122,14 +122,13 @@ class DialogCron extends React.Component {
 DialogCron.propTypes = {
     classes: PropTypes.object,
     onClose: PropTypes.func,
-    onOk: PropTypes.func.isRequire,
+    onOk: PropTypes.func,
     title: PropTypes.string,
     cron: PropTypes.string,
     cancel: PropTypes.string,
     ok: PropTypes.string,
     simple: PropTypes.bool,
     language: PropTypes.string
-
 };
 
 export default withStyles(styles)(DialogCron);
