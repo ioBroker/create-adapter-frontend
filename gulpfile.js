@@ -2,6 +2,8 @@ const gulp = require('gulp');
 const fs = require('fs');
 const archiver = require('archiver');
 const del = require('del');
+const AWS = require('aws-sdk');
+
 
 const rootDirName = __dirname + '/lambda';
 
@@ -95,6 +97,28 @@ gulp.task('clean', () =>
 gulp.task('test', done => {
     require('./test').then(result => {
         console.log(JSON.stringify(result));
+        done();
+    });
+});
+
+gulp.task('uploadLambda', done => {
+    if (fs.existsSync(__dirname + '/config.json')) {
+        AWS.config.loadFromPath(__dirname + '/config.json');
+    }
+
+    const lambda = new AWS.Lambda();
+    const zip = fs.readFileSync(__dirname + '/lambda/lambda.zip');
+    const params = {
+        FunctionName: "adapterCreator",
+        Publish: true,
+        ZipFile: zip
+    };
+    lambda.updateFunctionCode(params, (err, data) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.error(JSON.stringify(data));
+        }
         done();
     });
 });

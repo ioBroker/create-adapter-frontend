@@ -4,7 +4,8 @@
 	"dependencies": {
 		"archiver": "^3.0.0",
 		"del": "^5.0.0",
-		"gulp": "^4.0.2"
+		"gulp": "^4.0.2",
+		"aws-sdk": "^2.492.0"
 	},
 	"script": {
 		"test": "node test.js"

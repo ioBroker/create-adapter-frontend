@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 const fs = require('fs');
-if (fs.existsSync(__dirname + '/../config.json')) {
-    AWS.config.loadFromPath(__dirname + '/../config.json');
+if (fs.existsSync(__dirname + '/config.json')) {
+    AWS.config.loadFromPath(__dirname + '/config.json');
 }
 const s3 = new AWS.S3();
 const gulp = require('gulp');

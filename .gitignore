@@ -8,3 +8,4 @@
 /config.json
 /lambda/node_modules
 /lambda/lambda.zip
+/frontend/config.json
