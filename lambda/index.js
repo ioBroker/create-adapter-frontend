@@ -76,34 +76,50 @@ exports.handler = async (event) => {
     let answers = JSON.parse(event.body);
 
     console.log('ANSWERS: ' + JSON.stringify(answers, null, 2));
+    let base64 = '';
+    let fileName = '';
 
-    if (!fs.existsSync(rootDirName)) {
-        fs.mkdirSync(rootDirName);
-    } else {
-        // clean dir
-        deleteFolderRecursive(rootDirName, false);
+    try {
         if (!fs.existsSync(rootDirName)) {
             fs.mkdirSync(rootDirName);
+        } else {
+            // clean dir
+            deleteFolderRecursive(rootDirName, false);
+            if (!fs.existsSync(rootDirName)) {
+                fs.mkdirSync(rootDirName);
+            }
         }
+
+        // Check all answers
+        questions.checkAnswers(answers);
+        answers = await questions.formatAnswers(answers);
+        await questions.validateAnswers(answers, []);
+
+        // Create adapter directory
+        if (!fs.existsSync(`${rootDirName}/ioBroker.${answers.adapterName}`)) {
+            fs.mkdirSync(`${rootDirName}/ioBroker.${answers.adapterName}`);
+        }
+
+        // create files
+        const files = await createFiles(answers);
+        await writeFiles(`${rootDirName}/ioBroker.${answers.adapterName}`, files);
+
+        // pack the directory together
+        fileName = await pack(answers.adapterName);
+
+        base64 = fs.readFileSync(fileName).toString('base64');
+    } catch (e) {
+        console.error(`Error: ${e.toString()} <${JSON.stringify(e)}>`);
+        return {
+            statusCode: 501,
+            headers: {
+                'Content-Type': 'text/plain',
+                'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+                'Access-Control-Allow-Credentials': true // Required for cookies, authorization headers with HTTPS
+            },
+            body: e.toString()
+        };
     }
-    // Check all answers
-    questions.checkAnswers(answers);
-    answers = await questions.formatAnswers(answers);
-    await questions.validateAnswers(answers, []);
-
-    // Create adapter directory
-    if (!fs.existsSync(`${rootDirName}/ioBroker.${answers.adapterName}`)) {
-        fs.mkdirSync(`${rootDirName}/ioBroker.${answers.adapterName}`);
-    }
-
-    // create files
-    const files = await createFiles(answers);
-    await writeFiles(`${rootDirName}/ioBroker.${answers.adapterName}`, files);
-
-    // pack the directory together
-    const fileName = await pack(answers.adapterName);
-
-    const base64 = fs.readFileSync(fileName).toString('base64');
 
     try {
         deleteFolderRecursive(`${rootDirName}/ioBroker.${answers.adapterName}`, true);

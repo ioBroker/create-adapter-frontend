@@ -46,18 +46,22 @@ class Comm {
                         const text = e.srcElement.result;
                         const url = 'data:application/zip;base64,' + text;
 
-                        fetch(url)
-                            .then(res => res.blob())
-                            .then(blob => cb && cb(null, blob));
-                        /*
-                        var url = window.URL.createObjectURL(blob);
-                        var a = document.createElement('a');
-                        a.href = url;
-                        a.download = "filename.zip";
-                        document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
-                        a.click();
-                        a.remove(); //afterwards we remove the element again
-                    })*/
+                        if (text.length < 1000) {
+                            cb && cb(text)
+                        } else {
+                            fetch(url)
+                                .then(res => res.blob())
+                                .then(blob => cb && cb(null, blob));
+                            /*
+                            var url = window.URL.createObjectURL(blob);
+                            var a = document.createElement('a');
+                            a.href = url;
+                            a.download = "filename.zip";
+                            document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+                            a.click();
+                            a.remove(); //afterwards we remove the element again
+                        })*/
+                        }
                     });
 
                     // Start reading the blob as text.

@@ -33,6 +33,7 @@ import Paper from '@material-ui/core/Paper';
 
 import Comm from './Comm';
 import DialogCron from './Dialogs/Cron';
+import DialogError from './Dialogs/Error';
 
 import CheckIcon from '@material-ui/icons/DoneOutlined';
 import AddIcon from '@material-ui/icons/Add';
@@ -146,6 +147,9 @@ const styles = theme => ({
         paddingRight: 10,
         display: 'inline-block',
         marginLeft: 5
+    },
+    buttonCRON: {
+        marginTop: 18
     }
 });
 
@@ -916,6 +920,19 @@ class App extends Component {
         }
     }
 
+    getErrorDialog() {
+        if (this.state.error) {
+            return (<DialogError
+                key="dialogError"
+                text={this.state.error}
+                title="Error by creation"
+                onClose={() => this.setState({error: null})}
+            />);
+        } else {
+            return null;
+        }
+    }
+
     getUniqueParamName() {
         let i = 1;
         while (this.state.answers.parameters.find(param => param.name === 'option' + i)) i++;
@@ -1286,6 +1303,8 @@ class App extends Component {
                         </div>
                     </div>
                 </div>
+                {this.getCronDialog()}
+                {this.getErrorDialog()}
             </div>
         );
     }
