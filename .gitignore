@@ -2,3 +2,9 @@
 /.idea
 /node_modules
 /frontend/build
+/frontend/package-lock.json
+/lambda/package-lock.json
+/package-lock.json
+/config.json
+/lambda/node_modules
+/lambda/lambda.zip
