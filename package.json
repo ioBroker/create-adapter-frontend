@@ -3,11 +3,15 @@
 	"version": "1.0.0",
 	"dependencies": {
 		"archiver": "^3.0.0",
+		"aws-sdk": "^2.492.0",
 		"del": "^5.0.0",
-		"gulp": "^4.0.2",
-		"aws-sdk": "^2.492.0"
+		"gulp": "^4.0.2"
 	},
 	"script": {
 		"test": "node test.js"
+	},
+	"devDependencies": {
+		"@babel/preset-env": "^7.5.4",
+		"babel-preset-react": "^6.24.1"
 	}
 }

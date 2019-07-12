@@ -4,7 +4,7 @@
 	"private": true,
 	"main": "index.js",
 	"dependencies": {
-		"@iobroker/create-adapter": "^1.15.1",
+		"@iobroker/create-adapter": "^1.16.0",
 		"archiver": "^3.0.0"
 	},
 	"script": {
