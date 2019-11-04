@@ -167,6 +167,7 @@ const ADAPTER_TYPES = [
     { message: 'Garden                   (Mowers, watering, ...)', value: 'garden' },
     { message: 'General purpose          (like admin, web, discovery, ...)', value: 'general' },
     { message: 'Geo positioning          (transmission and receipt of position data)', value: 'geoposition' },
+    { message: 'Health                   (fitness, weight, bmi, ... )', value: 'health' },
     { message: 'Hardware                 (low-level, multi-purpose)', value: 'hardware' },
     { message: 'Household devices        (Vacuums, kitchen, ...)', value: 'household' },
     { message: 'Lighting control', value: 'lighting' },
