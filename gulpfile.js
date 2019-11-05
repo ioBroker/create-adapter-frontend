@@ -109,7 +109,7 @@ gulp.task('uploadLambda', done => {
     const lambda = new AWS.Lambda();
     const zip = fs.readFileSync(__dirname + '/lambda/lambda.zip');
     const params = {
-        FunctionName: "adapterCreator",
+        FunctionName: 'adapterCreator',
         Publish: true,
         ZipFile: zip
     };
