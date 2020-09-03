@@ -73,11 +73,13 @@ function pack(adapterName) {
 }
 
 exports.handler = async (event) => {
-    let answers = JSON.parse(event.body);
+    let answers = typeof event.body === 'string' ? JSON.parse(event.body) : event.body;
 
     console.log('ANSWERS: ' + JSON.stringify(answers, null, 2));
     let base64 = '';
     let fileName = '';
+
+    answers.ci = 'gh-actions';
 
     try {
         if (!fs.existsSync(rootDirName)) {
