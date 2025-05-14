@@ -1,4 +1,6 @@
 # Front-end for create adapter
+!Repository is deprecated. Please go to https://www.iobroker.dev/create-adapter/wizard
+
 The running instance can be found under [https://adapter-creator.iobroker.in/](https://adapter-creator.iobroker.in/)
 
 ![Screen](screen.jpg)
